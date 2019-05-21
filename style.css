@@ -1,0 +1,154 @@
+/* style fot index html - not needed outside the example*/
+/*-------------------------------------------------------------------------*/
+.box {
+  height: 150px;
+  width: 150px;
+}
+
+.a {
+  background-color: yellow;
+}
+
+.b {
+  background-color: blue;
+}
+
+.c {
+  background-color: chartreuse;
+}
+
+.d {
+  background-color: red;
+}
+/*-------------------------------------------------------------------------*/
+
+/*
+class's index
+----------------
+s1 = keyboard tab;
+s2 = cursor;
+s3 = contrast;
+s4 = zoom;
+s5 = desaturate (B&W colors);
+*/
+
+
+html.a11y-s3-3 {
+  background-color:#fff;
+}
+html.a11y-s3-3.a11y-s1 a:focus,html.a11y-s3-3.a11y-s1 button:focus,html.a11y-s3-3.a11y-s1 input:focus,html.a11y-s3-3.a11y-s1 select:focus,html.a11y-s3-3.a11y-s1 textarea:focus{
+  outline-color:#c00!important;
+}
+html.a11y-s3-2 {
+  background-color:#000;
+} 
+html.a11y-s3-2.a11y-s1 a:focus,html.a11y-s3-2.a11y-s1 button:focus,html.a11y-s3-2.a11y-s1 input:focus,html.a11y-s3-2.a11y-s1 select:focus,html.a11y-s3-2.a11y-s1 textarea:focus{outline-color:#50d0a0!important}
+html.a11y-s3-3 {
+  background-color:#fff;
+}
+html.a11y-s3-3.a11y-s1 a:focus,html.a11y-s3-3.a11y-s1 button:focus,html.a11y-s3-3.a11y-s1 input:focus,html.a11y-s3-3.a11y-s1 select:focus,html.a11y-s3-3.a11y-s1 textarea:focus {
+  outline-color:#c00!important;
+}
+html.a11y-s3-2 {
+  background-color:#000;
+}
+html.a11y-s3-2.a11y-s1 a:focus,html.a11y-s3-2.a11y-s1 button:focus,html.a11y-s3-2.a11y-s1 input:focus,html.a11y-s3-2.a11y-s1 select:focus,html.a11y-s3-2.a11y-s1 textarea:focus {
+  outline-color:#50d0a0!important;
+}
+
+.a11y-s1:focus {
+  outline: dashed 4px #c00 !important;
+}
+
+.a11y-s2,.a11y-s2 * {
+  cursor: url(./cursor.svg),auto!important;
+}
+
+.a11y-s3-1 {
+  background:#000!important;
+}
+
+.a11y-s3-1,.a11y-s3-1-ff {
+  filter:invert(100%);
+  -webkit-filter:invert(100%);
+}
+
+.a11y-s3-2,.a11y-s3-2 a,.a11y-s3-2 a:hover {
+  background-color:#000!important;
+}
+
+.a11y-s3-2 a {
+  border-color:#fff!important;
+  color:#fcff3c!important
+}
+
+.a11y-s3-2 abbr,.a11y-s3-2 article,.a11y-s3-2 aside,.a11y-s3-2 b,.a11y-s3-2 big,.a11y-s3-2 body,.a11y-s3-2 button,.a11y-s3-2 div,.a11y-s3-2 em,.a11y-s3-2 footer,.a11y-s3-2 form,.a11y-s3-2 h1,.a11y-s3-2 h2,.a11y-s3-2 h3,.a11y-s3-2 h4,.a11y-s3-2 h5,.a11y-s3-2 h6,.a11y-s3-2 header,.a11y-s3-2 i,.a11y-s3-2 input,.a11y-s3-2 label,.a11y-s3-2 li,.a11y-s3-2 main,.a11y-s3-2 nav,.a11y-s3-2 p,.a11y-s3-2 select,.a11y-s3-2 small,.a11y-s3-2 span,.a11y-s3-2 strong,.a11y-s3-2 td,.a11y-s3-2 textarea,.a11y-s3-2 th,.a11y-s3-2 ul {
+  background-color:#000!important;
+  border-color:#fff!important;
+  color:#50d0a0!important;
+}
+
+.a11y-s3-2 a:hover {
+  color:#fff!important;
+}
+
+.a11y-s3-3 {
+  background-color:#fff!important;
+}
+
+.a11y-s3-3 a {
+  border-color:#000!important;
+}
+
+.a11y-s3-3 abbr,.a11y-s3-3 article,.a11y-s3-3 aside,.a11y-s3-3 b,.a11y-s3-3 big,.a11y-s3-3 body,.a11y-s3-3 button,.a11y-s3-3 div,.a11y-s3-3 em,.a11y-s3-3 footer,.a11y-s3-3 form,.a11y-s3-3 h1,.a11y-s3-3 h2,.a11y-s3-3 h3,.a11y-s3-3 h4,.a11y-s3-3 h5,.a11y-s3-3 h6,.a11y-s3-3 header,.a11y-s3-3 i,.a11y-s3-3 input,.a11y-s3-3 label,.a11y-s3-3 li,.a11y-s3-3 main,.a11y-s3-3 nav,.a11y-s3-3 p,.a11y-s3-3 select,.a11y-s3-3 small,.a11y-s3-3 span,.a11y-s3-3 strong,.a11y-s3-3 td,.a11y-s3-3 textarea,.a11y-s3-3 th,.a11y-s3-3 ul {
+  background-color:#fff!important;
+  color:#000!important;
+  border-color:#000!important;
+}
+
+.a11y-s3-3 a:hover,.a11y-s3-3.a11y-s6 a:hover {
+  color:#000!important;
+  background-color:#fff!important;
+}
+
+.a11y-s3-3 a,.a11y-s3-3.a11y-s6 a,.a11y-s3-3.a11y-s6 a * {
+  color:#0000d3!important;
+  background-color:#fff!important;
+}
+
+.a11y-s4-1 {
+  zoom:130%;;
+}
+
+.a11y-s4-2 {
+  zoom:160%;
+}
+
+.a11y-s4-3 {
+  zoom:190%;
+}
+
+.a11y-s4-4 {
+  zoom:205%; 
+}
+
+.a11y-s5-1 {
+  filter:grayscale(100%)!important;
+  -webkit-filter:grayscale(100%)!important;
+}
+
+.a11y-s5-2 {
+  background-color:#888!important;
+  color:#fff!important;
+}
+
+.a11y-s5-3 {
+  background-color:#fff!important;
+  color:#000!important;
+}
+
+.a11y-s5-1.a11y-s3-1 {
+  filter:invert(100%) grayscale(100%)!important;
+  -webkit-filter:invert(100%) grayscale(100%)!important;
+  background:#000!important;
+}
