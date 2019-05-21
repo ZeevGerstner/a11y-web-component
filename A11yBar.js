@@ -143,7 +143,7 @@ class a11yMenu extends HTMLElement {
         this._toggleContrast();
         break;
       case 'Keyboard':
-        this._toggleDesaturate();
+        this._toggleKeyboard();
         break;
       case 'Cursor':
         this._toggleCursor();
@@ -157,13 +157,17 @@ class a11yMenu extends HTMLElement {
   _toggleDesaturate() {
     document.documentElement.classList.remove(`a11y-s5-${this.state.desaturate}`);
     this.state.desaturate < 2 ? this.state.desaturate += 1 : this.state.desaturate = 0;
-    document.documentElement.classList.add(`a11y-s5-${this.state.desaturate}`);
+    this.state.desaturate === 0
+      ? document.documentElement.classList.remove(`a11y-s5-${this.state.desaturate}`)
+      : document.documentElement.classList.add(`a11y-s5-${this.state.desaturate}`);
   }
 
   _toggleContrast() {
     document.documentElement.classList.remove(`a11y-s3-${this.state.contrast}`);
     this.state.contrast <= 2 ? this.state.contrast += 1 : this.state.contrast = 0;
-    document.documentElement.classList.add(`a11y-s3-${this.state.contrast}`);
+    this.state.contrast === 0
+      ? document.documentElement.classList.remove(`a11y-s3-${this.state.contrast}`)
+      : document.documentElement.classList.add(`a11y-s3-${this.state.contrast}`);
   }
 
   _toggleKeyboard() {
@@ -182,7 +186,9 @@ class a11yMenu extends HTMLElement {
   _toggleZoom() {
     document.documentElement.classList.remove(`a11y-s4-${this.state.zoom}`);
     this.state.zoom <= 3 ? this.state.zoom += 1 : this.state.zoom = 0;
-    document.documentElement.classList.add(`a11y-s4-${this.state.zoom}`);
+    this.state.zoom === 0
+      ? document.documentElement.classList.remove(`a11y-s4-${this.state.zoom}`)
+      : document.documentElement.classList.add(`a11y-s4-${this.state.zoom}`);
   }
 }
 
