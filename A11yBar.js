@@ -67,27 +67,27 @@ template.innerHTML = `
 
 <ul class="menu hide">
   <li> 
-    <button class="Desaturate" aria-label="desaturate">
+    <button class="desaturate" aria-label="desaturate">
       Desaturate
     </button>
   </li>
   <li> 
-    <button class="Contrast" aria-label="contrast">
+    <button class="contrast" aria-label="contrast">
       Contrast 
     </button>
   </li>
   <li> 
-    <button class="Keyboard" aria-label="keyboard">
+    <button class="keyboard" aria-label="keyboard">
       Keyboard 
     </button>
   </li>
   <li>
-    <button class="Cursor" aria-label="cursor">
+    <button class="cursor" aria-label="cursor">
       Cursor
     </button>
   </li>
   <li>
-    <button class="Zoom" aria-label="zoom">
+    <button class="zoom" aria-label="zoom">
       Zoom
     </button>
   </li>
@@ -118,11 +118,22 @@ class a11yMenu extends HTMLElement {
 
 
     this.state = {
-      zoom: 0,
-      contrast: 0,
-      desaturate: 0
+      zoom: {
+        classPrefix: 'a11y-s4',
+        count: 0,
+        max: 3
+      },
+      contrast: {
+        classPrefix: 'a11y-s3',
+        count: 0,
+        max: 2
+      },
+      desaturate: {
+        classPrefix: 'a11y-s5',
+        count: 0,
+        max: 2
+      }
     }
-
   }
 
   // toggle menu
@@ -131,48 +142,27 @@ class a11yMenu extends HTMLElement {
   }
 
   // invoke toggle function by class name
-  _toggleStyle(className) {
-
-    // var toggle = new Function(`return this._toggle${className}()`);
-    // toggle.call(this);
-    switch (className) {
-      case 'Desaturate':
-        this._toggleDesaturate();
+  _toggleStyle(type) {
+    switch (type) {
+      case 'desaturate':
+      case 'contrast':
+      case 'zoom':
+        this._toggleStyleByType(type)
         break;
-      case 'Contrast':
-        this._toggleContrast();
-        break;
-      case 'Keyboard':
+      case 'keyboard':
         this._toggleKeyboard();
         break;
-      case 'Cursor':
+      case 'cursor':
         this._toggleCursor();
         break;
-      case 'Zoom':
-        this._toggleZoom();
+      default:
         break;
     }
   }
 
-  _toggleDesaturate() {
-    document.documentElement.classList.remove(`a11y-s5-${this.state.desaturate}`);
-    this.state.desaturate < 2 ? this.state.desaturate += 1 : this.state.desaturate = 0;
-    this.state.desaturate === 0
-      ? document.documentElement.classList.remove(`a11y-s5-${this.state.desaturate}`)
-      : document.documentElement.classList.add(`a11y-s5-${this.state.desaturate}`);
-  }
-
-  _toggleContrast() {
-    document.documentElement.classList.remove(`a11y-s3-${this.state.contrast}`);
-    this.state.contrast <= 2 ? this.state.contrast += 1 : this.state.contrast = 0;
-    this.state.contrast === 0
-      ? document.documentElement.classList.remove(`a11y-s3-${this.state.contrast}`)
-      : document.documentElement.classList.add(`a11y-s3-${this.state.contrast}`);
-  }
-
   _toggleKeyboard() {
     const elTypes = ['A', 'INPUT', 'BUTTON'];
-    elTypes.reduce((a11y, elType) => a11y.concat(Array.from(document.body.querySelectorAll(elType))), [])
+    elTypes.reduce((els, elType) => els.concat(Array.from(document.body.querySelectorAll(elType))), [])
       .map(el => {
         el.tabIndex = 0;
         el.classList.toggle('a11y-s1');
@@ -183,12 +173,13 @@ class a11yMenu extends HTMLElement {
     document.documentElement.classList.toggle('a11y-s2');
   }
 
-  _toggleZoom() {
-    document.documentElement.classList.remove(`a11y-s4-${this.state.zoom}`);
-    this.state.zoom <= 3 ? this.state.zoom += 1 : this.state.zoom = 0;
-    this.state.zoom === 0
-      ? document.documentElement.classList.remove(`a11y-s4-${this.state.zoom}`)
-      : document.documentElement.classList.add(`a11y-s4-${this.state.zoom}`);
+  _toggleStyleByType(type) {
+    let a11yType = this.state[type]
+    document.documentElement.classList.remove(`${a11yType.classPrefix}-${a11yType.count}`);
+    a11yType.count <= a11yType.max ? a11yType.count += 1 : a11yType.count = 0;
+    a11yType.count === 0
+      ? document.documentElement.classList.remove(`${a11yType.classPrefix}-${a11yType.count}`)
+      : document.documentElement.classList.add(`${a11yType.classPrefix}-${a11yType.count}`);
   }
 }
 
