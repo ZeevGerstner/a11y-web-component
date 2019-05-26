@@ -12,6 +12,7 @@ template.innerHTML = `
     bottom: 10px;
     right: 10px;
     box-sizing: border-box;
+    z-index: 99;
   }
 
   :host.cursor {
