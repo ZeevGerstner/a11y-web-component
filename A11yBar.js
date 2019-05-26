@@ -207,7 +207,7 @@ class a11yMenu extends HTMLElement {
       } else if (key === 'keyboard') {
         if (this.state.keyboard.active) this._toggleKeyboard();
         continue;
-      }
+      } 
       let elCount = this.state[key].count;
       if (elCount) {
         document.documentElement.classList.add(`${this.state[key].classPrefix}-${elCount}`);
