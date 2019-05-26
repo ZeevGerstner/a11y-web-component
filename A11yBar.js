@@ -190,6 +190,9 @@ class a11yMenu extends HTMLElement {
         font: {
           classPrefix: 'a11y-font',
           active: false
+        },
+        keyboard: {
+          active: false
         }
       }
     }
@@ -200,6 +203,9 @@ class a11yMenu extends HTMLElement {
     for (let key in this.state) {
       if (key === 'cursor' || key === 'font') {
         this._checkIsActive(key);
+        continue;
+      } else if (key === 'keyboard') {
+        if (this.state.keyboard.active) this._toggleKeyboard();
         continue;
       }
       let elCount = this.state[key].count;
@@ -243,6 +249,7 @@ class a11yMenu extends HTMLElement {
   _toggleKeyboard() {
     this.$menu.classList.toggle('a11y-s1');
     this._toggleStageSpan('keyboard');
+    this.state.keyboard.active = !this.state.keyboard.active;
 
     const elTypes = ['A', 'INPUT', 'BUTTON'];
     elTypes
