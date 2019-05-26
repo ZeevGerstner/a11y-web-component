@@ -9,8 +9,8 @@ Simple a11y menu bar web component.
 
 # Vue:
  // in main.js <br>  
- ``import 'path-to-dir/A11yBar'``
- ``import 'path-to-dir/style.css'``
+ ``import 'path-to-dir/A11yBar'`` <br> 
+ ``import 'path-to-dir/style.css'`` <br> 
  ``Vue.config.ignoredElements = ['a11y-menu']``
 
 // in App.vue  <br>
@@ -19,7 +19,7 @@ Simple a11y menu bar web component.
 # React:
 [DEMO](https://zeevgerstner.github.io/movieApp_react/#/)<br>
 //in App.js  <br>
- ``import 'path-to-dir/A11yBar'``
+ ``import 'path-to-dir/A11yBar'`` <br> 
  ``import 'path-to-dir/style.css'``
 
 //in APP class in the render function  <br>

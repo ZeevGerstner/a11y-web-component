@@ -33,6 +33,10 @@ s5 = desaturate (B&W colors);
 */
 
 
+.a11y-font {
+  font-family: sans-serif !important;
+}
+
 html.a11y-s3-3 {
   background-color:#fff;
 }

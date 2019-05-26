@@ -137,9 +137,10 @@ template.innerHTML = `
       Zoom
     </button>
   </li>
-  <li>
-    <button class="dark" disabled>
-      Dark mode
+  <li  class="font">
+    <span class="active-stage hide">√</span>
+    <button aria-label="font">
+      Font
     </button>
   </li>
 </ul>
@@ -149,7 +150,6 @@ class a11yMenu extends HTMLElement {
 
   constructor() {
     super();
-
     // create shadow root
     this._shadowRoot = this.attachShadow({ 'mode': 'open' });
     this._shadowRoot.appendChild(template.content.cloneNode(true));
@@ -162,21 +162,51 @@ class a11yMenu extends HTMLElement {
     this.$menu = this._shadowRoot.querySelector('ul');
     this.$menu.addEventListener('click', (ev) => this._toggleStyle(ev.target.parentElement.classList[0]));
 
-    this.state = {
-      zoom: {
-        classPrefix: 'a11y-s4',
-        count: 0,
-        max: 3
-      },
-      contrast: {
-        classPrefix: 'a11y-s3',
-        count: 0,
-        max: 2
-      },
-      desaturate: {
-        classPrefix: 'a11y-s5',
-        count: 0,
-        max: 2
+    if (localStorage['a11y']) {
+      this.state = JSON.parse(localStorage['a11y']);
+      this._setStyleFromStorage();
+    } else {
+      this.state = {
+        zoom: {
+          classPrefix: 'a11y-s4',
+          count: 0,
+          max: 3
+        },
+        contrast: {
+          classPrefix: 'a11y-s3',
+          count: 0,
+          max: 2
+        },
+        desaturate: {
+          classPrefix: 'a11y-s5',
+          count: 0,
+          max: 2
+        },
+        cursor: {
+          classPrefix: 'a11y-s2',
+          active: false
+        },
+        font: {
+          classPrefix: 'a11y-font',
+          active: false
+        }
+      }
+    }
+
+  }
+
+  _setStyleFromStorage() {
+    for (let key in this.state) {
+      if (key === 'cursor' || key === 'font') {
+        this._checkIsActive(key);
+        continue;
+      }
+      let elCount = this.state[key].count;
+      if (elCount) {
+        document.documentElement.classList.add(`${this.state[key].classPrefix}-${elCount}`);
+        const elSpan = this._shadowRoot.querySelector(`.${key} span`);
+        elSpan.textContent = elCount;
+        elSpan.classList.remove('hide');
       }
     }
   }
@@ -192,17 +222,21 @@ class a11yMenu extends HTMLElement {
       case 'desaturate':
       case 'contrast':
       case 'zoom':
-        this._toggleStyleByType(type)
+        this._toggleStyleByType(type);
         break;
       case 'keyboard':
         this._toggleKeyboard();
         break;
       case 'cursor':
-        this._toggleCursor();
+        this._toggleOnceOnly('cursor')
+        break;
+      case 'font':
+        this._toggleOnceOnly('font')
         break;
       default:
         break;
     }
+    this._saveToStorage();
   }
 
   _toggleKeyboard() {
@@ -218,9 +252,19 @@ class a11yMenu extends HTMLElement {
       });
   }
 
-  _toggleCursor() {
-    document.documentElement.classList.toggle('a11y-s2');
-    this._toggleStageSpan('cursor');
+  _toggleOnceOnly(type) {
+    const a11yType = this.state[type];
+    document.documentElement.classList.toggle(a11yType.classPrefix);
+    this._toggleStageSpan(type);
+    a11yType.active = !a11yType.active;
+  }
+
+  _checkIsActive(type) {
+    const a11yType = this.state[type];
+    if (a11yType.active) {
+      document.documentElement.classList.add(a11yType.classPrefix);
+      this._shadowRoot.querySelector(`.${type} span`).classList.remove('hide');
+    }
   }
 
   _toggleStyleByType(type) {
@@ -228,12 +272,13 @@ class a11yMenu extends HTMLElement {
     const prefix = a11yType.classPrefix;
 
     const elClassList = document.documentElement.classList;
-    
+
     elClassList.remove(`${prefix}-${a11yType.count}`);
 
     const elSpan = this._shadowRoot.querySelector(`.${type} span`);
-    this._setTypeCount.call(a11yType, elSpan)
-    
+
+    this._setTypeCount.call(a11yType, elSpan);
+
     if (!a11yType.count) {
       elSpan.classList.add('hide');
     } else {
@@ -250,6 +295,11 @@ class a11yMenu extends HTMLElement {
   _toggleStageSpan(type) {
     this._shadowRoot.querySelector(`.${type} span`).classList.toggle('hide');
   }
+
+  _saveToStorage() {
+    localStorage['a11y'] = JSON.stringify(this.state);
+  }
+
 }
 
 window.customElements.define('a11y-menu', a11yMenu);
