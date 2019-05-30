@@ -30,6 +30,8 @@ s2 = cursor;
 s3 = contrast;
 s4 = zoom;
 s5 = desaturate (B&W colors);
+sg = Highlight links;
+s7 = font;
 */
 
 
@@ -155,4 +157,19 @@ html.a11y-s3-2.a11y-s1 a:focus,html.a11y-s3-2.a11y-s1 button:focus,html.a11y-s3-
   filter:invert(100%) grayscale(100%)!important;
   -webkit-filter:invert(100%) grayscale(100%)!important;
   background:#000!important;
+}
+
+.a11y-s6 a,.a11y-s6 a * {
+  text-decoration:underline!important;
+  color:#ff0!important;
+  background-color:#000!important;
+}
+
+.a11y-s6 a img {
+  box-sizing:border-box!important;
+  border:1px solid #ff0!important;
+}
+
+.a11y-s7 {
+  font-family:Arial,serif!important;
 }
